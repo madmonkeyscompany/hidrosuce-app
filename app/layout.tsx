@@ -1,0 +1,51 @@
+import type { Metadata, Viewport } from "next";
+import { Bebas_Neue, IBM_Plex_Sans } from "next/font/google";
+import { Toaster } from "sonner";
+import "./globals.css";
+
+const bebas = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-bebas",
+  display: "swap",
+});
+
+const plex = IBM_Plex_Sans({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: "--font-plex",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: "Hidro Suce · Manutenção",
+  description:
+    "Histórico de manutenção das empilhadeiras — consulte pelo QR code ou pelo painel.",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0b1220",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: LayoutProps<"/">) {
+  return (
+    <html lang="pt-BR" className={`${bebas.variable} ${plex.variable}`}>
+      <body>
+        {children}
+        <Toaster
+          position="top-center"
+          theme="dark"
+          toastOptions={{
+            style: {
+              background: "var(--color-surface)",
+              border: "1px solid var(--color-line)",
+              color: "var(--color-ink)",
+            },
+          }}
+        />
+      </body>
+    </html>
+  );
+}
